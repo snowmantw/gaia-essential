@@ -5,12 +5,17 @@
   "version": "0.0.1",
   "description": "Essential parts of Mozilla Gaia",
   "devDependencies": {
+    "nodegit": "~0.0.79",
+    "bower": "~1.2.7",
+    "grunt": "~0.4.0",
     "grunt-cli": "~0.1.11",
-    "grunt-contrib-jshint": "~0.7.2"
+    "grunt-bower-task": "~0.3.4",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-gaia-builder": "~0.0.2"
   },
   "dependencies": {
   },
   "scripts": {
-    "postinstall": "grunt --force --verbose"
+    "postinstall": "grunt bower"
   }
 }
