@@ -1,0 +1,16 @@
+{
+  "author": "Mozilla",
+  "name": "gaia-essential",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Essential parts of Mozilla Gaia",
+  "devDependencies": {
+    "grunt-cli": "~0.1.11",
+    "grunt-contrib-jshint": "~0.7.2"
+  },
+  "dependencies": {
+  },
+  "scripts": {
+    "postinstall": "grunt --force"
+  }
+}
