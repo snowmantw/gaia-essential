@@ -11,6 +11,6 @@
   "dependencies": {
   },
   "scripts": {
-    "postinstall": "grunt --force"
+    "postinstall": "grunt --force --verbose"
   }
 }
