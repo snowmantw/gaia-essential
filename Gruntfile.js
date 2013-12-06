@@ -27,4 +27,4 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['bower', 'gaiabuilder']);
   grunt.registerTask('merge', ['bower']);
   grunt.registerTask('default', ['bower']);
-}
+};

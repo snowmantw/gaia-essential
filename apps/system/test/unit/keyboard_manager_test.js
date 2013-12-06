@@ -79,6 +79,7 @@ suite('KeyboardManager', function() {
   suite('Transitions', function() {
     setup(function(next) {
       setTimeout(next, 500);
+      this.sinon.stub(KeyboardManager, 'showIMESwitcher');
     });
 
     test('showKeyboard triggers transition', function(next) {
@@ -144,7 +145,8 @@ suite('KeyboardManager', function() {
       }, 350);
     });
 
-    test('UpdateHeight waits for transform transition', function(next) {
+    test('UpdateHeight waits for transform transition' +
+         ' - intermittent bug 935904', function(next) {
       var called = false;
       window.addEventListener('keyboardchange', function() {
         called = true;
@@ -207,6 +209,7 @@ suite('KeyboardManager', function() {
   suite('UpdateHeight', function() {
     setup(function(next) {
       setTimeout(next, 500);
+      this.sinon.stub(KeyboardManager, 'showIMESwitcher');
     });
     test('Second updateHeight evt triggers keyboardchange', function(next) {
       var kcEvent = sinon.stub();
@@ -566,6 +569,7 @@ suite('KeyboardManager', function() {
     setup(function(next) {
       KeyboardManager.keyboardFrameContainer.classList.add('hide');
       setTimeout(next, 100);
+      this.sinon.stub(KeyboardManager, 'showIMESwitcher');
     });
 
     test('Hide immediately after show should destroy', function(next) {
@@ -602,6 +606,7 @@ suite('KeyboardManager', function() {
     var showKeyboard;
     setup(function() {
       showKeyboard = this.sinon.stub(KeyboardManager, 'showKeyboard');
+      this.sinon.stub(KeyboardManager, 'showIMESwitcher');
     });
 
     function fakeMozbrowserResize(height) {

@@ -64,7 +64,7 @@ var StatusBar = {
     'battery', 'wifi', 'data', 'flight-mode', 'network-activity', 'tethering',
     'alarm', 'bluetooth', 'mute', 'headphones', 'bluetooth-headphones',
     'bluetooth-transferring', 'recording', 'sms', 'geolocation', 'usb', 'label',
-    'system-downloads', 'call-forwarding', 'playing'],
+    'system-downloads', 'call-forwarding', 'playing', 'keyboard'],
 
   /* Timeout for 'recently active' indicators */
   kActiveIndicatorTimeout: 5 * 1000,
@@ -212,6 +212,10 @@ var StatusBar = {
     window.addEventListener('unlock', this);
     window.addEventListener('lockpanelchange', this);
 
+    // Listen to the IME switcher shows/hide
+    window.addEventListener('keyboardimeswitchershow', this);
+    window.addEventListener('keyboardimeswitcherhide', this);
+
     this.systemDownloadsCount = 0;
     this.setActive(true);
   },
@@ -287,6 +291,14 @@ var StatusBar = {
           this.toggleTimeLabel(false);
           this.toggleTimeLabel(true);
         }).bind(this));
+        break;
+
+      case 'keyboardimeswitchershow':
+        this.toggleKeyboardLabel(true);
+        break;
+
+      case 'keyboardimeswitcherhide':
+        this.toggleKeyboardLabel(false);
         break;
 
       case 'mozChromeEvent':
@@ -511,7 +523,7 @@ var StatusBar = {
         flightModeIcon.hidden = true;
         icon.hidden = false;
 
-        if (IccHelper.cardState === 'absent') {
+        if (!IccHelper.cardState) {
           // no SIM
           delete icon.dataset.level;
           delete icon.dataset.emergency;
@@ -815,6 +827,11 @@ var StatusBar = {
     icon.hidden = !enable;
   },
 
+  toggleKeyboardLabel: function sb_toggleKeyboardLabel(enable) {
+    var icon = this.icons.keyboard;
+    icon.hidden = !enable;
+  },
+
   updateNotification: function sb_updateNotification(count) {
     var icon = this.icons.notification;
     if (!count) {
@@ -904,5 +921,8 @@ if (navigator.mozL10n.readyState == 'complete' ||
     navigator.mozL10n.readyState == 'interactive') {
   StatusBar.init();
 } else {
-  window.addEventListener('localized', StatusBar.init.bind(StatusBar));
+  window.addEventListener('localized', function statusbar_init() {
+    window.removeEventListener('localized', statusbar_init);
+    StatusBar.init();
+  });
 }

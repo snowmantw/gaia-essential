@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
     <meta charset="utf-8">
 
     <!-- Shared code -->
@@ -139,6 +140,7 @@
 
     <!-- LockScreen -->
     <link rel="stylesheet" type="text/css" href="style/lockscreen/lockscreen.css">
+    <script defer src="js/lockscreen_slide.js"></script>
     <script defer src="js/lockscreen.js"></script>
 
     <!-- PIN Unlocking -->
@@ -209,6 +211,9 @@
     <!-- Wifi -->
     <script defer src="js/wifi.js"></script>
 
+    <!-- Nfc -->
+    <script defer src="js/nfc_manager.js"></script>
+
     <!-- Voicemail -->
     <script defer src="js/voicemail.js"></script>
 
@@ -265,6 +270,10 @@
     <script defer src="js/base_ui.js"></script>
     <script defer src="js/app_modal_dialog.js"></script>
     <script defer src="js/window.js"></script>
+
+    <script defer src="js/shrinking_ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/shrinking_ui/shrinking_ui.css">
+
     <script defer src="js/wrapper_factory.js"></script>
     <script defer src="js/homescreen_window.js"></script>
     <script defer src="js/homescreen_launcher.js"></script>
@@ -375,6 +384,7 @@
         <!-- Notification -->
         <div id="statusbar-notification" class="sb-start sb-icon sb-icon-notification"
           data-num="" hidden></div>
+        <div id="statusbar-keyboard" class="sb-start sb-icon sb-icon-keyboard" hidden></div>
 
         <!-- Time -->
         <div id="statusbar-time"></div>
@@ -1038,28 +1048,9 @@
               </div>
               <div id="lockscreen-area-slide"
                    class="lockscreen-icon-area lockscreen-icon-center">
-
-                <!-- Order matters. If track after handle, it will overlay on the handle -->
-                <div id="lockscreen-slide-track">
-                  <div class="lockscreen-icon lockscreen-slide-left">
-                  </div>
-                  <div class="lockscreen-icon lockscreen-slide-center">
-                  </div>
-                  <div class="lockscreen-icon lockscreen-slide-right">
-                  </div>
+                <div id="lockscreen-canvas-wrapper">
+                  <canvas id="lockscreen-canvas"></canvas>
                 </div>
-
-                <div id="lockscreen-slide-handle">
-                  <div class="lockscreen-icon lockscreen-slide-left" data-role="handle-left">
-                    <span>&nbsp;</span>
-                  </div>
-                  <div class="lockscreen-icon lockscreen-slide-center" data-role="handle-center">
-                  </div>
-                  <div class="lockscreen-icon lockscreen-slide-right" data-role="handle-right">
-                    <span>&nbsp;</span>
-                  </div>
-                </div>
-
               </div>
             </div>
           </div>
